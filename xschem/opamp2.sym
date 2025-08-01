@@ -1,0 +1,107 @@
+v {xschem version=3.4.8RC file_version=1.2}
+G {}
+K {type=subcircuit
+format="@name @pinlist @symname"
+template="name=x1"
+}
+V {}
+S {}
+E {}
+L 4 -1380 0 -1240 -100 {}
+L 4 -1380 -200 -1240 -100 {}
+L 4 -1380 -200 -1380 0 {}
+L 7 -1400 -130 -1380 -130 {}
+L 7 -1400 -70 -1380 -70 {}
+L 7 -1310 -50 -1310 -30 {}
+L 7 -1240 -100 -1220 -100 {}
+B 5 -1242.5 -102.5 -1237.5 -97.5 {name=vop dir=inout}
+B 5 -1382.5 -132.5 -1377.5 -127.5 {name=vin dir=inout}
+B 5 -1382.5 -72.5 -1377.5 -67.5 {name=vim dir=inout}
+B 5 -1312.5 -52.5 -1307.5 -47.5 {name=vom dir=inout}
+T {vop} -1275 -96 2 1 0.2 0.2 {}
+T {vin} -1355 -134 0 1 0.2 0.2 {}
+T {vim} -1355 -74 0 1 0.2 0.2 {}
+T {vom} -1314 -25 3 1 0.2 0.2 {}
+N -1800 -230 -1740 -230 {lab=Vin}
+N -1680 -230 -1640 -230 {lab=n1}
+N -1520 -230 -1440 -230 {lab=Virt}
+N -1410 -340 -1400 -340 {lab=Vout}
+N -1500 -340 -1470 -340 {lab=Virt}
+N -1500 -340 -1500 -230 {lab=Virt}
+N -1400 -340 -1230 -340 {lab=Vout}
+N -1230 -340 -1230 -290 {lab=Vout}
+N -1800 -230 -1800 20 {lab=Vin}
+N -1800 80 -1480 80 {lab=GND}
+N -1480 80 -1300 80 {lab=GND}
+N -1300 20 -1300 80 {lab=GND}
+N -1310 -30 -1300 20 {lab=GND}
+N -1480 -60 -1480 20 {lab=Vcm}
+N -1480 -60 -1420 -60 {lab=Vcm}
+N -1420 -60 -1400 -70 {lab=Vcm}
+N -1440 -230 -1440 -140 {lab=Virt}
+N -1440 -140 -1400 -130 {lab=Virt}
+N -1220 -100 -1170 -100 {lab=Vout}
+N -1230 -290 -1230 -140 {lab=Vout}
+N -1230 -140 -1200 -140 {lab=Vout}
+N -1200 -140 -1200 -100 {lab=Vout}
+N -1640 -230 -1580 -230 {lab=n1}
+C {vsource.sym} -1800 50 0 0 {name=V1 value="0 AC 1" savecurrent=false}
+C {res.sym} -1550 -230 1 0 {name=R1
+value=5k
+footprint=1206
+device=resistor
+m=1}
+C {capa.sym} -1710 -230 1 0 {name=C2
+m=1
+value=4.7u
+footprint=1206
+device="ceramic capacitor"}
+C {res.sym} -1440 -340 1 0 {name=R2
+value=5k
+footprint=1206
+device=resistor
+m=1}
+C {vsource.sym} -1480 50 0 0 {name=V2 value=1.5 
+savecurrent=false}
+C {gnd.sym} -1800 80 0 0 {name=l4 lab=GND}
+C {lab_wire.sym} -1770 -230 0 0 {name=p1 sig_type=std_logic lab=Vin}
+C {lab_wire.sym} -1640 -230 0 0 {name=p2 sig_type=std_logic lab=n1}
+C {lab_wire.sym} -1500 -340 0 0 {name=p3 sig_type=std_logic lab=Virt}
+C {lab_wire.sym} -1170 -100 2 0 {name=p4 sig_type=std_logic lab=Vout}
+C {lab_wire.sym} -1480 -60 0 0 {name=p5 sig_type=std_logic lab=Vcm}
+C {simulator_commands_shown.sym} -1030 -310 0 0 {name=COMMANDS
+simulator=ngspice
+only_toplevel=false 
+value="
+.CONTROL
+   op
+   set appendwrite
+   AC DEC 100 0.1 10Meg
+
+   write micTest.raw
+
+   * Measure max gain in dB at Vout
+   MEAS AC gain_db MAX vdb(Vout) FROM=0.1 TO=10Meg
+
+   * Calculate -3dB level
+   LET vm3db = gain_db - 3.0
+   print vm3db
+
+   * Find frequencies where gain crosses -3dB level (rise and fall)
+   MEAS AC fzero WHEN vdb(Vout)=vm3db RISE=1
+   MEAS AC fpole WHEN vdb(Vout)=vm3db FALL=1
+
+   * Calculate phase in degrees (use Vout node exactly as defined in netlist)
+   LET phase_deg = cph(vout)*180/PI
+
+   * Measure phase at fzero frequency
+   MEAS AC phase_zero FIND phase_deg AT = fzero
+
+   * Plot gain in dB
+   plot vdb(Vout)
+
+   * Plot phase in degrees
+   plot phase_deg
+
+.ENDC
+* ngspice commands"}
