@@ -39,15 +39,15 @@ This repository documents various aspects of analog integrated circuit (IC) desi
 
 This section explains the analog front-end of a USB microphone setup and its role in signal conditioning and conversion.
 
+![System Overview](images/Fig-d1-1-USBmic.png)
+
 ### 🔧 System Overview
 
-- **MEMS Microphone (SPH8878LR5H-1)**: Captures sound and outputs an analog voltage signal  
-- **Op-Amp (OPA344)**: Amplifies & filters  
-- **ADC + USB Output**: Digitizes and sends to PC  
+- **MEMS Microphone (SPH8878LR5H-1)**: Captures sound and outputs an analog voltage signal
+- **Op-Amp (OPA344)**: Amplifies & filters
+- **ADC + USB Output**: Digitizes and sends to PC
 
 🎧 This design enables real-time USB-MIDI output via analog signal conditioning.
-
-![System Overview](images/Fig-d1-1-USBmic.png)
 
 ---
 
@@ -55,23 +55,20 @@ This section explains the analog front-end of a USB microphone setup and its rol
 
 To understand the microphone as a signal source, it can be modeled with its Thevenin equivalent:
 
-![Thevenin Model](images/thevenineqcktmic.png)
-
 This model helps in:
 
 - Analyzing signal strength and loading  
 - Impedance matching for the amplifier input  
 - Ensuring minimal signal loss at the interface
 
----
+![Thevenin Model](images/thevenineqcktmic.png)
 
-### 📷 Microphone Circuit Schematic
-
-![Mic Opamp Schematic](images/micopamp.png)
-
+📷 This schematic shows the practical implementation of the Thevenin model using Xschem.
 ---
 
 ### 📈 Output Response of the Microphone Circuit
+---
+The simulation below shows the voltage output (vout) across the load, after signal amplification and filtering.
 
 ![Mic Output Plot](images/micoutput.png)
 
@@ -81,12 +78,14 @@ This model helps in:
 
 ### 📈 Frequency Response
 
+The frequency response reveals the bandwidth and filtering effects of the analog stage.
 ![Mic Frequency Response](images/micplot.jpeg)
 
 ---
 
 ## 🔁 Simulink Output
 
+The Simulink simulation confirms system-level behavior and time-domain signal dynamics.
 ![Mic Simulink Output](images/micsim.jpeg)
 
 ---
@@ -95,20 +94,20 @@ This model helps in:
 
 To better analyze the frequency response of the analog front-end, the operational amplifier is modeled using a single-pole transfer function. This provides insight into the bandwidth limitations and phase behavior of the amplifier.
 
-![Mic Opamp Simulation](images/micopampsim.jpeg)
+![Mic Opamp](images/micopamp.jpeg)
 
 ---
 
 ### 🔁 Simulink Output
-
-*(If available, insert simulink waveform image here)*
+The Simulink simulation confirms system-level behavior and time-domain signal dynamics.
+![Mic Opamp Simulation](images/micopampsim.jpeg)
 
 ---
 
 ### 2. High-Pass Filter Circuit
 
 This section explains the working and transfer function of a high-pass filter using an op-amp.
-
+![High-Pass Filter Circuit](images/Fig-d5-1-highPass.png)
 ---
 
 ### 🧰 Circuit Overview
@@ -119,7 +118,7 @@ This section explains the working and transfer function of a high-pass filter us
 
 ### 🧮 S-Domain Transfer Function
 
-H(s) = (Rf * s * Ci) / (1 + s * Ri * Ci) 
+H(s) = (Rf * s * Ci) / (1 + s * Ri * Ci)
 
 
 
@@ -131,36 +130,35 @@ H(s) = (Rf * s * Ci) / (1 + s * Ri * Ci)
 ### 🔻 Cutoff Frequency (fc)
 
 fc = 1 / (2πRiCi) ≈ 6.77 Hz 
-
-
+For Ri = 5kΩ, Ci = 4.7μF
 ---
 
 ### 🖼️ Op-Amp Schematic Diagram
-
+Detailed internal schematic of the operational amplifier:
 ![Opamp Schematic](images/highpassopaschematic.jpeg)
 
 ---
 
 ### 🔣 Op-Amp Symbolic Diagram
-
+Standard symbolic representation of an operational amplifier:
 ![Opamp Symbol](images/opampsymbolic.jpeg)
 
 ---
 
 ### 📐 High-Pass Filter Circuit Using the Op-Amp
-
+High-pass filter circuit built using the op-amp symbol shown above:
 ![High-Pass Circuit](images/highpassckt.jpeg)
 
 ---
 
 ### 📈 Frequency Response Plot of the High-Pass Filter
-
+The plot below shows the frequency response (gain vs frequency) of the high-pass filter circuit.
 ![Frequency Response](images/highpassfreq.jpeg)
 
 ---
 
 ### 🔁 Simulink Output of the High-Pass Filter
-
+simulink output from the Simulink simulation of the high-pass filter circuit.
 ![Simulink Output](images/highsim.jpeg)
 
 ---
