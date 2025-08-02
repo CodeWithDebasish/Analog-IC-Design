@@ -16,37 +16,70 @@ This repository documents various aspects of analog integrated circuit (IC) desi
 ## 1. USB Microphone System Analysis
 
 This section explains the analog front-end of a USB microphone setup and its role in signal conditioning and conversion.
-### 📷 Microphone Circuit Schematic
 
-![Mic Schematic](images/Fig-d1-1-USBmic.png)
 ### 🔧 System Overview
 
-- **MEMS Microphone**: Captures sound and outputs analog signal  
+- **MEMS Microphone (SPH8878LR5H-1)**: Captures sound and outputs an analog voltage signal  
 - **Op-Amp (OPA344)**: Amplifies & filters  
-- **ADC + USB Output**: Digitizes and sends to PC
+- **ADC + USB Output**: Digitizes and sends to PC  
 
 🎧 This design enables real-time USB-MIDI output via analog signal conditioning.
 
-### 🎛️ Thevenin Equivalent Model
+![System Overview](images/Fig-d1-1-USBmic.png)
 
-![Thevenin Model](images/thevenin_model.png)
+---
 
-Used for:
-- Impedance matching  
-- Loading analysis  
-- Minimal signal loss
+### 🎛️ Thevenin Equivalent Model of the Microphone
 
-### 📈 Output Response
+To understand the microphone as a signal source, it can be modeled with its Thevenin equivalent:
 
-![Output Response](images/output_response.png)
+![Thevenin Model](images/thevenineqcktmic.png)
 
-🧪 Shows amplified voltage within designed range.
+This model helps in:
 
-### 📊 Frequency Response
+- Analyzing signal strength and loading  
+- Impedance matching for the amplifier input  
+- Ensuring minimal signal loss at the interface
 
-![Freq Response](images/freq_response.png)
+---
 
-Reveals bandwidth and filter behavior.
+### 📷 Microphone Circuit Schematic
+
+![Mic Opamp Schematic](images/micopamp.png)
+
+---
+
+### 📈 Output Response of the Microphone Circuit
+
+![Mic Output Plot](images/micoutput.png)
+
+🧪 This waveform helps verify if the designed circuit properly amplifies the mic signal within expected voltage ranges.
+
+---
+
+### 📈 Frequency Response
+
+![Mic Frequency Response](images/micplot.jpeg)
+
+---
+
+### 🔁 Simulink Output
+
+![Mic Simulink Output](images/micsim.jpeg)
+
+---
+
+## 🔧 Op-Amp Modeling as a Single Pole System
+
+To better analyze the frequency response of the analog front-end, the operational amplifier is modeled using a single-pole transfer function. This provides insight into the bandwidth limitations and phase behavior of the amplifier.
+
+![Mic Opamp Simulation](images/micopampsim.jpeg)
+
+---
+
+### 🔁 Simulink Output
+
+*(If available, insert simulink waveform image here)*
 
 ---
 
@@ -54,52 +87,67 @@ Reveals bandwidth and filter behavior.
 
 This section explains the working and transfer function of a high-pass filter using an op-amp.
 
-### 🔎 Circuit Overview
+---
 
-- `C_i = 4.7 μF` (blocks DC)  
-- `R_i = R_f = 5kΩ` (sets gain & time constant)  
-- Op-Amp in **non-inverting** mode
+### 🧰 Circuit Overview
 
-### 🧮 Transfer Function
+- Input Capacitor `C_i = 4.7μF`: Blocks DC  
+- Resistors `R_i = R_f = 5kΩ`: Define gain and cutoff  
+- Op-Amp in non-inverting configuration  
 
+### 🧮 S-Domain Transfer Function
 
-H(s) = (Rf * s * Ci) / (1 + s * Ri * Ci)
-
-
-- At low freq → attenuation  
-- At high freq → gain = 1
-
-### 🔻 Cutoff Frequency
-
-fc = 1 / (2πRiCi)
-≈ 6.77 Hz
+H(s) = (Rf * s * Ci) / (1 + s * Ri * Ci) 
 
 
-### 🖼️ Schematic & Symbolic Diagram
 
-![Opamp Symbol](images/opamp_symbol.png)  
-![HPF Schematic](images/hpf_schematic.png)
-
-### 📈 Frequency Response of HPF
-
-![HPF Response](images/hpf_response.png)
-
-### 🔁 Simulink Output
-
-![HPF Simulink Output](images/hpf_simulink.png)
+- At low frequencies → H(s) → 0 (attenuates low freq)  
+- At high frequencies → H(s) → 1 (passes high freq)
 
 ---
 
-## 📄 View Simulation Files
+### 🔻 Cutoff Frequency (fc)
 
-[Click here to see high-pass SPICE file](netlists/hiPass.sp)
+fc = 1 / (2πRiCi) ≈ 6.77 Hz 
+
 
 ---
 
->>>>>>> 9d60157 (Update README with structured documentation and visuals)
+### 🖼️ Op-Amp Schematic Diagram
 
-<<<<<<< HEAD
-...content from remote GitHub repo...
-=======
-...your local changes...
->>>>>>> 9d60157... Update README with structured documentation and visuals
+![Opamp Schematic](images/highpassopaschematic.jpeg)
+
+---
+
+### 🔣 Op-Amp Symbolic Diagram
+
+![Opamp Symbol](images/opampsymbolic.jpeg)
+
+---
+
+### 📐 High-Pass Filter Circuit Using the Op-Amp
+
+![High-Pass Circuit](images/highpassckt.jpeg)
+
+---
+
+### 📈 Frequency Response Plot of the High-Pass Filter
+
+![Frequency Response](images/highpassfreq.jpeg)
+
+---
+
+### 🔁 Simulink Output of the High-Pass Filter
+
+![Simulink Output](images/highsim.jpeg)
+
+---
+
+## 📄 Click here to view SPICE simulation code
+
+> [hiPass.sp](hiPass.sp)  
+> [hipass.sp](hipass.sp)
+
+---
+
+
