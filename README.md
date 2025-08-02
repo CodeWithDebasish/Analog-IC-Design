@@ -168,7 +168,6 @@ fc = 1 / (2πRiCi) ≈ 6.77 Hz
 ## 📄 Click here to view SPICE simulation code
 
 > [hiPass.sp](hiPass.sp)  
-> [hipass.sp](hipass.sp)
 
 ---
 ## 3.Siliwiz Simulation
@@ -180,7 +179,6 @@ fc = 1 / (2πRiCi) ≈ 6.77 Hz
 ## 4.Current Mirror
 The circuit is used to copy the flow of current in one active device and controlling the flow of current in another device by maintaining the output current stable instead of loading
 ![Current Mirror Circuit](images/currentmirror.png)
-cp /mnt/c/Users/debas/Downloads/{fet.png,nfet.png,currentmirror.png,siliwiz.png} .
 ---
 
 ## 5.FET Characterization
@@ -206,6 +204,7 @@ Highlights exponential characteristics at low V<sub>DS</sub>.
 Useful for identifying subthreshold operation region.
 
 ✅ Outcome / Learning:
+---
 Verified three modes of operation: cutoff, triode, and saturation.
 
 Visualized how V<sub>GS</sub> modulates drain current.
@@ -215,6 +214,7 @@ Confirmed square-law relationship in saturation (linear √I<sub>D</sub> vs V<su
 Demonstrated log-linear behavior in subthreshold region.
 
 Learned to interpret raw Ngspice waveforms for device-level analysis.
+
 ---
 ## 6.NFET Characterization
 To analyze the DC characteristics of an NMOS transistor using Ngspice simulations run from Xschem, including current behavior in linear, saturation, and subthreshold regions.
@@ -242,6 +242,7 @@ Emphasizes subthreshold conduction at low V<sub>DS</sub> and V<sub>GS</sub>.
 Confirms exponential behavior of drain current in subthreshold region.
 
 ✅ Outcome / Learnings:
+---
 Demonstrated DC sweep analysis for NMOS.
 
 Observed impact of gate voltage on drain current.
@@ -255,4 +256,5 @@ Linear region: I<sub>D</sub> ∝ V<sub>DS</sub>
 Saturation: I<sub>D</sub> ∝ (V<sub>GS</sub> - V<sub>th</sub>)²
 
 Subthreshold: log(I<sub>D</sub>) ∝ V<sub>GS</sub>
+
 ---
