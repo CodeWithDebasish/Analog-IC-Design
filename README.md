@@ -171,10 +171,8 @@ fc = 1 / (2πRiCi) ≈ 6.77 Hz
 
 ---
 ## 3.Siliwiz Simulation
-   Converts drawn layouts into functional circuits using SPICE backend.
-
+Converts drawn layouts into functional circuits using SPICE backend.
 ![Siliwiz Output](images/siliwiz.png)
-
 ---
 ## 4.Current Mirror
 The circuit is used to copy the flow of current in one active device and controlling the flow of current in another device by maintaining the output current stable instead of loading
