@@ -6,11 +6,33 @@ This repository documents various aspects of analog integrated circuit (IC) desi
 
 ---
 
+# 📘 Analog IC Design Internship Report
+
+**Name:** DEBASISH BISOI  
+**SIC:** 23BEEG07  
+**Branch:** Electrical & Electronics Engineering  
+**Duration:** June 2nd, 2025 – June 20th, 2025  
+**Mentor:** Dr. Saroj Rout  
+
+---
+
+## 🛠️ Software Used
+
+- Xschem  
+- Ngspice  
+- Siliwiz  
+- Git & GitHub  
+
+---
+
 ## 📑 Table of Contents
 
 1. [USB Microphone System Analysis](#1-usb-microphone-system-analysis)
 2. [High-Pass Filter Circuit](#2-high-pass-filter-circuit)
-
+3. [Siliwiz Simulation](#3-siliwiz-simulation)
+4. [Current Mirror](#4-current-mirror)
+5. [FET Characterization](#5-fet-characterization)
+6. [NFET Characterization](#5-fet-characterization)
 ---
 
 ## 1. USB Microphone System Analysis
@@ -63,7 +85,7 @@ This model helps in:
 
 ---
 
-### 🔁 Simulink Output
+## 🔁 Simulink Output
 
 ![Mic Simulink Output](images/micsim.jpeg)
 
@@ -83,7 +105,7 @@ To better analyze the frequency response of the analog front-end, the operationa
 
 ---
 
-## 2. High-Pass Filter Circuit
+### 2. High-Pass Filter Circuit
 
 This section explains the working and transfer function of a high-pass filter using an op-amp.
 
@@ -149,5 +171,88 @@ fc = 1 / (2πRiCi) ≈ 6.77 Hz
 > [hipass.sp](hipass.sp)
 
 ---
+## 3.Siliwiz Simulation
+   Converts drawn layouts into functional circuits using SPICE backend.
 
+![Siliwiz Output](images/siliwiz.png)
 
+---
+## 4.Current Mirror
+The circuit is used to copy the flow of current in one active device and controlling the flow of current in another device by maintaining the output current stable instead of loading
+![Current Mirror Circuit](images/currentmirror.png)
+cp /mnt/c/Users/debas/Downloads/{fet.png,nfet.png,currentmirror.png,siliwiz.png} .
+---
+
+## 5.FET Characterization
+To characterize the I-V behavior of an n-channel MOSFET (FET) by running a DC sweep analysis using Ngspice through an Xschem-based setup.
+![FET Characterization Work](images/fet.png)
+📊 Simulation Outputs:
+Three key plots are generated:
+
+1. |I<sub>DS</sub>| vs V<sub>DS</sub> (bottom-right):
+
+Shows the drain current increasing non-linearly with V<sub>DS</sub> and higher V<sub>GS</sub>.
+
+Confirms saturation region behavior at higher V<sub>DS</sub>.
+
+2. √(2|I<sub>DS</sub>|) vs V<sub>DS</sub> (bottom-left):
+
+Linear region curve used to extract transconductance (g<sub>m</sub>) and validate square-law model in saturation.
+
+3. log(|I<sub>DS</sub>|) vs V<sub>DS</sub> (top-left):
+
+Highlights exponential characteristics at low V<sub>DS</sub>.
+
+Useful for identifying subthreshold operation region.
+
+✅ Outcome / Learning:
+Verified three modes of operation: cutoff, triode, and saturation.
+
+Visualized how V<sub>GS</sub> modulates drain current.
+
+Confirmed square-law relationship in saturation (linear √I<sub>D</sub> vs V<sub>GS</sub>).
+
+Demonstrated log-linear behavior in subthreshold region.
+
+Learned to interpret raw Ngspice waveforms for device-level analysis.
+---
+## 6.NFET Characterization
+To analyze the DC characteristics of an NMOS transistor using Ngspice simulations run from Xschem, including current behavior in linear, saturation, and subthreshold regions.
+
+![NFET Characterization Work](images/nfet.png)
+📈 Results Interpreted from Plots:
+1. |I<sub>DS</sub>| vs V<sub>DS</sub> (bottom-left):
+
+Shows typical drain current response.
+
+Confirms triode → saturation transition as V<sub>DS</sub> increases.
+
+Higher V<sub>GS</sub> yields higher I<sub>D</sub>, validating channel modulation.
+
+2. √(2|I<sub>DS</sub>|) vs V<sub>DS</sub> (top-center):
+
+Exhibits linearity in saturation region.
+
+Used to verify square-law behavior of NMOS and extract K′ or mobility parameters.
+
+3. log(|I<sub>DS</sub>|) vs V<sub>DS</sub> (bottom-center):
+
+Emphasizes subthreshold conduction at low V<sub>DS</sub> and V<sub>GS</sub>.
+
+Confirms exponential behavior of drain current in subthreshold region.
+
+✅ Outcome / Learnings:
+Demonstrated DC sweep analysis for NMOS.
+
+Observed impact of gate voltage on drain current.
+
+Validated square-law and subthreshold exponential models.
+
+Strengthened understanding of:
+
+Linear region: I<sub>D</sub> ∝ V<sub>DS</sub>
+
+Saturation: I<sub>D</sub> ∝ (V<sub>GS</sub> - V<sub>th</sub>)²
+
+Subthreshold: log(I<sub>D</sub>) ∝ V<sub>GS</sub>
+---
