@@ -1,7 +1,5 @@
 # Analog-IC-Design
 High-performance analog circuit design workflows powered by open-source tools like Ngspice, Xschem, Magic, and Sky130. Includes schematics, netlists, simulations, layout automation, and verification scripts. 📐 Op-Amps • Filters • Bias Circuits • Layout vs. Schematic (LVS) • DRC-clean layouts 🚀 Built for research, education, and rapid prototyping.
-<<<<<<< HEAD
-=======
 # 🎤 Analog IC Design
 
 This repository documents various aspects of analog integrated circuit (IC) design with examples, circuit images, simulations, and system-level analysis. It is structured for quick understanding and reference for students and enthusiasts in electronics and communication.
@@ -18,7 +16,9 @@ This repository documents various aspects of analog integrated circuit (IC) desi
 ## 1. USB Microphone System Analysis
 
 This section explains the analog front-end of a USB microphone setup and its role in signal conditioning and conversion.
+### 📷 Microphone Circuit Schematic
 
+![Mic Schematic](images/Fig-d1-1-USBmic.png)
 ### 🔧 System Overview
 
 - **MEMS Microphone**: Captures sound and outputs analog signal  
@@ -35,10 +35,6 @@ Used for:
 - Impedance matching  
 - Loading analysis  
 - Minimal signal loss
-
-### 📷 Microphone Circuit Schematic
-
-![Mic Schematic](images/mic_circuit.png)
 
 ### 📈 Output Response
 
