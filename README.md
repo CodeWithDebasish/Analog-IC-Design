@@ -169,16 +169,16 @@ simulink output from the Simulink simulation of the high-pass filter circuit.
 > [hiPass.sp](hiPass.sp)  
 
 ---
-### 3.Siliwiz Simulation
+## 3. Siliwiz Simulation
 Converts drawn layouts into functional circuits using SPICE backend.
 ![Siliwiz Output](images/siliwiz.png)
 ---
-### 4.Current Mirror
+## 4. Current Mirror
 The circuit is used to copy the flow of current in one active device and controlling the flow of current in another device by maintaining the output current stable instead of loading
 ![Current Mirror Circuit](images/currentmirror.png)
 ---
 
-### 5.FET Characterization
+## 5. FET Characterization
 To characterize the I-V behavior of an n-channel MOSFET (FET) by running a DC sweep analysis using Ngspice through an Xschem-based setup.
 ![FET Characterization Work](images/fet.png)
 📊 Simulation Outputs:
@@ -213,7 +213,7 @@ Demonstrated log-linear behavior in subthreshold region.
 Learned to interpret raw Ngspice waveforms for device-level analysis.
 
 ---
-### 6.NFET Characterization
+## 6. NFET Characterization
 To analyze the DC characteristics of an NMOS transistor using Ngspice simulations run from Xschem, including current behavior in linear, saturation, and subthreshold regions.
 
 ![NFET Characterization Work](images/nfet.png)
